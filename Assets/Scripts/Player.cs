@@ -4,23 +4,18 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
-[Serializable]
-public class DataInventory
-{
-    public int helmet;
-    public int ak;
-    public int makarov;
-}
-
 public class Player : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    public List<Item> allItems = new List<Item>();
+    public List<Item> inventory = new List<Item>();
     [SerializeField] private float speed;
     [SerializeField] private byte health;
     [SerializeField] private byte shotDamage;
+    [SerializeField] private byte shotDistance;
     [SerializeField] private byte bulletsCount;
-    [SerializeField] private FixedJoystick joystick;
+    [SerializeField] private Joystick joystick;
     [SerializeField] private Transform healthPanel;
+    [SerializeField] private new Transform camera;
 
     public void Damage(byte damage)
     {
@@ -47,7 +42,7 @@ public class Player : MonoBehaviour
                 closestMutantIndex = i;
             }
         }
-        if (closestMutantDistance > 4)
+        if (closestMutantDistance > shotDistance)
             return;
 
         mutants[closestMutantIndex].GetComponent<Mutant>().Damage(shotDamage);
@@ -55,38 +50,20 @@ public class Player : MonoBehaviour
         bulletsCount--;
     }
 
-    public void TakeItem(Item item)
+    public void TakeItem(int item)
     {
-        if (items.Contains(item))
-            items[items.IndexOf(item)].Count++;
+        if (inventory.Contains(allItems[item]))
+            inventory[inventory.IndexOf(allItems[item])].count++;
         else
         {
-            item.Count = 1;
-            items.Add(item);
+            allItems[item].count = 1;
+            inventory.Add(allItems[item]);
         }
     }
 
     private void Update()
     {
         transform.position += new Vector3(joystick.Horizontal * speed, joystick.Vertical * speed);
-    }
-
-    public void SaveData()
-    {
-        DataInventory data = new DataInventory();
-
-        Item item = items.Find(i => i.name == "Helmet");
-        data.helmet = item == null ? 0 : item.Count;
-
-        item = items.Find(i => i.name == "AK-74");
-        data.ak = item == null ? 0 : item.Count;
-
-        item = items.Find(i => i.name == "Makarov");
-        data.makarov = item == null ? 0 : item.Count;
-    }
-
-    public void LoadData()
-    {
-
+        camera.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 }

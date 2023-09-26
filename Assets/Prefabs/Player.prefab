@@ -53,13 +53,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9514fee82669ada4aa64610bf4c10a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  allItems:
+  - {fileID: 11400000, guid: 0cd01fd8beeab5d45b37ad6896afd65a, type: 2}
+  - {fileID: 11400000, guid: 81bf29fb8e373714589f18ad683f4b5b, type: 2}
+  - {fileID: 11400000, guid: 88442696921013649a8f5402c34fcb7c, type: 2}
+  inventory: []
   speed: 0.05
   health: 100
   shotDamage: 30
+  shotDistance: 4
   bulletsCount: 15
   joystick: {fileID: 0}
   healthPanel: {fileID: 25169660247350346}
+  camera: {fileID: 0}
 --- !u!1 &1776676336950948267
 GameObject:
   m_ObjectHideFlags: 0

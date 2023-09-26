@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
+    [SerializeField] private float takeDistance;
     [SerializeField] private Item[] items;
     public GameObject player; // игрок
-    public Item item;
+    public int item;
 
     private void Start()
     {
-        item = items[Random.Range(0, items.Length)];
-        GetComponent<SpriteRenderer>().sprite = item.Icon;
+        item = Random.Range(0, items.Length);
+        GetComponent<SpriteRenderer>().sprite = player.GetComponent<Player>().allItems[item].icon;
     }
 
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 0.5f)
+        if (Vector3.Distance(player.transform.position, transform.position) < takeDistance)
         {
             player.GetComponent<Player>().TakeItem(item);
             Destroy(gameObject);

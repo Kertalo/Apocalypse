@@ -21,15 +21,15 @@ public class Inventory : MonoBehaviour
 
     public void DeleteItem()
     {
-        player.items.Remove(player.items[deleteIndex]);
+        player.inventory.Remove(player.inventory[deleteIndex]);
         deleteButton.interactable = false;
         OpenInventory();
     }
 
     public void ChangeDeleteIndex(string name)
     {
-        for (int i = 0; i < player.items.Count; i++)
-            if (player.items[i].Name == name)
+        for (int i = 0; i < player.inventory.Count; i++)
+            if (player.inventory[i].name == name)
                 deleteIndex = i;
         deleteButton.interactable = true;
     }
@@ -39,13 +39,13 @@ public class Inventory : MonoBehaviour
         foreach (var item in itemsOnPanel)
             Destroy(item);
         itemsOnPanel.Clear();
-        foreach (var item in player.items)
+        foreach (var item in player.inventory)
         {
             GameObject Item = Instantiate(itemPrefab, inventoryPanel.transform);
-            Item.GetComponent<Image>().sprite = item.Icon;
-            Item.GetComponent<ItemPrefab>().name = item.Name;
-            if (item.Count > 1)
-                Item.GetComponent<ItemPrefab>().count.text = item.Count.ToString();
+            Item.GetComponent<Image>().sprite = item.icon;
+            Item.GetComponent<ItemPrefab>().name = item.name;
+            if (item.count > 1)
+                Item.GetComponent<ItemPrefab>().count.text = item.count.ToString();
             itemsOnPanel.Add(Item);
         }
     }

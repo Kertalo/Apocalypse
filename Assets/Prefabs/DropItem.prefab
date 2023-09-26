@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812ff71e91716fb41af7dcd71193629d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takeDistance: 0.5
   items:
   - {fileID: 11400000, guid: 0cd01fd8beeab5d45b37ad6896afd65a, type: 2}
   - {fileID: 11400000, guid: 81bf29fb8e373714589f18ad683f4b5b, type: 2}
   - {fileID: 11400000, guid: 88442696921013649a8f5402c34fcb7c, type: 2}
   player: {fileID: 0}
-  item: {fileID: 0}
+  item: 0
